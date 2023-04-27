@@ -3,12 +3,33 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import tokenAddressReducer from "./features/takeTokenAddress";
+import benificiaryAddressReducer from "./features/takeBenificiary";
+import startdateReducer from "./features/startdate";
+import enddateReducer from "./features/enddate";
+import starttimeReducer from "./features/starttime";
+import endtimeReducer from "./features/endtime";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+const store = configureStore({
+  reducer: {
+    tokenField: tokenAddressReducer,
+    benificiaryField: benificiaryAddressReducer,
+    startdateField: startdateReducer,
+    enddateField: enddateReducer,
+    starttimeField: starttimeReducer,
+    endtimeField: endtimeReducer,
+  },
+});
+
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

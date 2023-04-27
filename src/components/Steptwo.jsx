@@ -1,12 +1,15 @@
-import React, { createContext, useState } from "react";
-
-// const tokenAddress = createContext();
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTokenAddress } from "../features/takeTokenAddress";
 
 const Steptwo = () => {
+  const dispatch = useDispatch();
   const [token, setTokenValue] = useState("");
   const handleChange = (event) => {
     setTokenValue(event.target.value);
   };
+  console.log(token);
+  dispatch(addTokenAddress({ tokenAddress: token }));
 
   return (
     <div className=" bg-white  shadow-for-bg shadow-md  mb-5 mx-48 rounded-b-2xl text-left pb-4">

@@ -10,6 +10,7 @@
     "dotenv": "^16.0.3",
     "ethers": "5.7.0",
     "react": "^18.2.0",
+    "react-calendar": "^2.19.2",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
