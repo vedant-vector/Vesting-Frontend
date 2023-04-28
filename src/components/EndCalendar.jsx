@@ -28,6 +28,7 @@ const EndCalendar = () => {
         type="date"
         min={newStartDate.toISOString().slice(0, 10)}
         onChange={(e) => setEndDate(e.target.value)}
+        required
       />
     </div>
   );

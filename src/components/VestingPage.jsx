@@ -15,17 +15,21 @@ const VestingPage = () => {
       </p>
 
       <div>
-        <HeadingBar title={"Step -1  Select Network"} />
-        <Stepone />
-        <HeadingBar title={"Step -2  Enter Token Address"} />
-        <Steptwo />
-        <HeadingBar title={"Step -3  Enter Wallet Address"} />
-        <Stepthree />
-        <HeadingBar title={"Step -4  Enter Vesting Details"} />
-        <Stepfour />
-        <HeadingBar title={"Step -5  Enter Token Amount"} />
-        <Stepfive />
-        <Creatation />
+        <form action="">
+          <HeadingBar title={"Step -1  Select Network"} />
+          <Stepone />
+          <HeadingBar title={"Step -2  Enter Token Address"} />
+          <Steptwo />
+          <HeadingBar title={"Step -3  Enter Wallet Address"} />
+          <Stepthree />
+          <HeadingBar title={"Step -4  Enter Vesting Details"} />
+          <Stepfour />
+          <HeadingBar title={"Step -5  Enter Token Amount"} />
+          <Stepfive />
+          <button type="submit">
+            <Creatation />
+          </button>
+        </form>
       </div>
     </div>
   );

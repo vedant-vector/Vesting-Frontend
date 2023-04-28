@@ -24,6 +24,7 @@ const Steptwo = () => {
           type="text"
           className={`h-10 w-96 bg-tahiti border-for-bg border rounded-lg my-2 pl-3 text-lg`}
           onChange={handleChange}
+          required
         />
         <p className=" text-base">
           e.g. 0xCC4304A31d09258b0029eA7FE63d032f52e44EFe

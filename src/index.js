@@ -11,6 +11,9 @@ import startdateReducer from "./features/startdate";
 import enddateReducer from "./features/enddate";
 import starttimeReducer from "./features/starttime";
 import endtimeReducer from "./features/endtime";
+import sliceTimeReducer from "./features/slicetime";
+import cliffReducer from "./features/takecliff";
+import tokenamountReducer from "./features/tokenAmount";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -22,6 +25,9 @@ const store = configureStore({
     enddateField: enddateReducer,
     starttimeField: starttimeReducer,
     endtimeField: endtimeReducer,
+    slicetimeField: sliceTimeReducer,
+    cliffField: cliffReducer,
+    tokenAmountField: tokenamountReducer,
   },
 });
 

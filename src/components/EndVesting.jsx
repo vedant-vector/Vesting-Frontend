@@ -2,15 +2,23 @@ import React, { useState } from "react";
 import EndCalendar from "./EndCalendar";
 import { useDispatch } from "react-redux";
 import { addendtime } from "../features/endtime";
+import { addSlice } from "../features/slicetime";
 
 const EndVesting = () => {
   const dispatch = useDispatch();
   const [end, setEnd] = useState("00:00");
+  const [slice, setSlice] = useState("noslice");
   const handleChange = (e) => {
     setEnd(e.target.value);
   };
   dispatch(addendtime({ getendtime: end }));
   console.log(end);
+  const handleSlice = (e) => {
+    setSlice(e.target.value);
+  };
+  console.log(slice);
+  dispatch(addSlice({ getslicetime: slice }));
+
   return (
     <div>
       <div className=" ml-24 pt-3 text-lg flex  ">
@@ -26,6 +34,7 @@ const EndVesting = () => {
             className={`h-10 w-60 bg-tahiti border-for-bg border rounded-lg my-2 pl-3 text-lg`}
             placeholder="00:00"
             onChange={handleChange}
+            required
           />
         </p>
         <p className=" ml-52 text-lg inline">
@@ -33,7 +42,10 @@ const EndVesting = () => {
             name="slice"
             id="slice"
             className="h-10 w-60 bg-tahiti border-for-bg border rounded-lg my-2 ml-0 pl-3 text-lg"
+            onChange={handleSlice}
+            required
           >
+            <option value="noslice">No Slice</option>
             <option value="second">per seconds</option>
             <option value="minute">per minutes</option>
             <option value="hour">per hour</option>

@@ -17,6 +17,12 @@ const Header = () => {
     setConnection(true);
     console.log(address);
   };
+  window.ethereum.on("accountsChanged", walletConnect);
+  // window.ethereum.on("networkChanged", () => {
+  //   window.onbeforeunload = function () {
+  //     return "Prevent reload";
+  //   };
+  // });
   return (
     <div className="h-18 border-b-2 shadow-for-bg shadow-2xl flex">
       <img

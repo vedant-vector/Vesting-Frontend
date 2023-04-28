@@ -33,7 +33,7 @@ const networks = {
 };
 
 const Stepone = () => {
-  const handleNetworkSwitch = async (newchainID, networkname) => {
+  const handleNetworkSwitch = async (newchainID, networkname, e) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
     const { chainId } = await provider.getNetwork();
@@ -70,108 +70,103 @@ const Stepone = () => {
 
   return (
     <div className=" bg-white shadow-for-bg shadow-lg py-3 mb-5 mx-48 rounded-b-2xl">
-      <form action="#">
-        <p className="ml-24 pt-1 text-xl text-left">
-          Select Blockchain Network Of Your Token:-
-        </p>
+      {/* <form action="#"> */}
+      <p className="ml-24 pt-1 text-xl text-left">
+        Select Blockchain Network Of Your Token:-
+      </p>
 
-        <div className=" bg-tahiti shadow-md h-16 rounded-2xl my-3 ml-48 w-96 inline-block float-left">
-          <div className="float-right pt-6 pr-7 ">
-            <input
-              type="radio"
-              name="network"
-              id="0"
-              className=" float-right  cursor-pointer "
-              onClick={() => handleNetworkSwitch(1, "ethereum")}
-            />
-          </div>
-          <div>
-            <img
-              src={ethLogo}
-              alt="Ethereum Logo"
-              className=" max-h-11 pl-5 pt-0 mt-2 float-left"
-            />
-          </div>
-          <div className=" w-max">
-            <p className="pt-1 text-xl text-left ml-9 pl-10">
-              Ethereum Mainnet
-            </p>
-            <p className=" text-left ml-9 pl-10 pb-6 ">ETH</p>
-          </div>
+      <div className=" bg-tahiti shadow-md h-16 rounded-2xl my-3 ml-48 w-96 inline-block float-left">
+        <div className="float-right pt-6 pr-7 ">
+          <input
+            type="radio"
+            name="network"
+            id="0"
+            className=" float-right  cursor-pointer "
+            onClick={(e) => handleNetworkSwitch(1, "ethereum", e)}
+          />
         </div>
-        <div className=" bg-tahiti h-16 shadow-md rounded-2xl my-3 w-96 inline-block ">
+        <div>
+          <img
+            src={ethLogo}
+            alt="Ethereum Logo"
+            className=" max-h-11 pl-5 pt-0 mt-2 float-left"
+          />
+        </div>
+        <div className=" w-max">
+          <p className="pt-1 text-xl text-left ml-9 pl-10">Ethereum Mainnet</p>
+          <p className=" text-left ml-9 pl-10 pb-6 ">ETH</p>
+        </div>
+      </div>
+      <div className=" bg-tahiti h-16 shadow-md rounded-2xl my-3 w-96 inline-block ">
+        <div className="float-right pt-6 pr-7 ">
+          <input
+            type="radio"
+            name="network"
+            id="1"
+            className=" float-right cursor-pointer"
+            onClick={() => handleNetworkSwitch(11155111, "sepolia")}
+            required
+          />
+        </div>
+        <div>
+          <img
+            src={ethLogo}
+            alt="Ethereum Logo"
+            className=" max-h-11 pl-5 pt-0 mt-2 float-left"
+          />
+        </div>
+        <div className="">
+          <p className="pt-1 text-xl text-left ml-9 pl-10">Sepolia Testnet</p>
+          <p className=" text-left ml-9 pl-10 pb-6 ">ETH</p>
+        </div>
+      </div>
+      <div>
+        <div className=" bg-tahiti h-16 shadow-md rounded-2xl my-3 ml-48 w-96 inline-block float-left">
           <div className="float-right pt-6 pr-7 ">
             <input
               type="radio"
               name="network"
-              id="1"
+              id="3"
               className=" float-right cursor-pointer"
-              onClick={() => handleNetworkSwitch(11155111, "sepolia")}
+              onClick={() => handleNetworkSwitch(137, "polygon")}
             />
           </div>
           <div>
             <img
-              src={ethLogo}
-              alt="Ethereum Logo"
-              className=" max-h-11 pl-5 pt-0 mt-2 float-left"
+              src={mumbaiLogo}
+              alt="Mumbai Logo"
+              className=" max-h-12 pl-5 pt-3 float-left"
             />
           </div>
           <div className="">
-            <p className="pt-1 text-xl text-left ml-9 pl-10">Sepolia Testnet</p>
-            <p className=" text-left ml-9 pl-10 pb-6 ">ETH</p>
+            <p className="pt-1 text-xl text-left ml-9 pl-10">Polygon Mainnet</p>
+            <p className=" text-left ml-9 pl-10 pb-6 ">Matic</p>
           </div>
         </div>
-        <div>
-          <div className=" bg-tahiti h-16 shadow-md rounded-2xl my-3 ml-48 w-96 inline-block float-left">
-            <div className="float-right pt-6 pr-7 ">
-              <input
-                type="radio"
-                name="network"
-                id="3"
-                className=" float-right cursor-pointer"
-                onClick={() => handleNetworkSwitch(137, "polygon")}
-              />
-            </div>
-            <div>
-              <img
-                src={mumbaiLogo}
-                alt="Mumbai Logo"
-                className=" max-h-12 pl-5 pt-3 float-left"
-              />
-            </div>
-            <div className="">
-              <p className="pt-1 text-xl text-left ml-9 pl-10">
-                Polygon Mainnet
-              </p>
-              <p className=" text-left ml-9 pl-10 pb-6 ">Matic</p>
-            </div>
+        <div className=" bg-tahiti h-16 shadow-md rounded-2xl my-3 w-96 inline-block">
+          <div className="float-right pt-6 pr-7 ">
+            <input
+              type="radio"
+              name="network"
+              id="4"
+              className=" float-right cursor-pointer"
+              onClick={() => handleNetworkSwitch(80001, "mumbai")}
+            />
           </div>
-          <div className=" bg-tahiti h-16 shadow-md rounded-2xl my-3 w-96 inline-block">
-            <div className="float-right pt-6 pr-7 ">
-              <input
-                type="radio"
-                name="network"
-                id="4"
-                className=" float-right cursor-pointer"
-                onClick={() => handleNetworkSwitch(80001, "mumbai")}
-              />
-            </div>
-            <div>
-              <img
-                src={mumbaiLogo}
-                alt="Mumbai Logo"
-                className=" max-h-12 pl-5 pt-3 float-left"
-              />
-            </div>
-            <div className="">
-              <p className="pt-1 text-xl text-left ml-9 pl-10">
-                Polygon Testnet
-              </p>
-              <p className=" text-left ml-9 pl-10 pb-6 ">Matic</p>
-            </div>
+          <div>
+            <img
+              src={mumbaiLogo}
+              alt="Mumbai Logo"
+              className=" max-h-12 pl-5 pt-3 float-left"
+            />
+          </div>
+          <div className="">
+            <p className="pt-1 text-xl text-left ml-9 pl-10">Polygon Testnet</p>
+            <p className=" text-left ml-9 pl-10 pb-6 ">Matic</p>
           </div>
         </div>
-      </form>
+      </div>
+      {/* </form> */}
     </div>
   );
 };

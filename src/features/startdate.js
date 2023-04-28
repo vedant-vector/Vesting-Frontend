@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const startdateSlice = createSlice({
   name: "startdateSlice",
-  initialState: { value: { getstartDate: "endtimeField" } },
+  initialState: { value: { getstartDate: "" } },
   reducers: {
     addstartDate: (state, action) => {
       state.value = action.payload;

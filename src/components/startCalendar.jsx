@@ -24,6 +24,7 @@ function MyCalendar() {
         className="h-10 w-56 bg-tahiti border-for-bg border rounded-lg my-2 pl-3 text-lg"
         type="date"
         min={getToday()}
+        required
         onChange={(e) => setStartDate(e.target.value)}
       />
     </div>
