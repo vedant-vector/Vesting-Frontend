@@ -46,10 +46,10 @@ const EndVesting = () => {
             required
           >
             <option value="noslice">No Slice</option>
-            <option value="second">per seconds</option>
-            <option value="minute">per minutes</option>
-            <option value="hour">per hour</option>
-            <option value="day">per day</option>
+            <option value="1">per seconds</option>
+            <option value="60">per minutes</option>
+            <option value="3600">per hour</option>
+            <option value="86400">per day</option>
           </select>
         </p>
       </div>

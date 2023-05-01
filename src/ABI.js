@@ -8,12 +8,7 @@ export const abi = [
         name: "_from",
         type: "address",
       },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
+      { indexed: false, internalType: "address", name: "_to", type: "address" },
       {
         indexed: false,
         internalType: "uint256",
@@ -46,12 +41,7 @@ export const abi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
+      { indexed: false, internalType: "address", name: "_to", type: "address" },
       {
         indexed: false,
         internalType: "uint256",
@@ -89,40 +79,18 @@ export const abi = [
   },
   {
     inputs: [
-      { internalType: "address", name: "benificiary", type: "address" },
-      { internalType: "uint256", name: "vestingID", type: "uint256" },
-    ],
-    name: "releaseTokens",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
       { internalType: "address", name: "", type: "address" },
       { internalType: "uint256", name: "", type: "uint256" },
     ],
     name: "vestingSchedules",
     outputs: [
-      {
-        internalType: "contract IERC20",
-        name: "_token",
-        type: "address",
-      },
+      { internalType: "contract IERC20", name: "_token", type: "address" },
       { internalType: "uint256", name: "_startTime", type: "uint256" },
       { internalType: "uint256", name: "_cliff", type: "uint256" },
-      {
-        internalType: "uint256",
-        name: "_vestingPeriod",
-        type: "uint256",
-      },
+      { internalType: "uint256", name: "_vestingPeriod", type: "uint256" },
       { internalType: "uint256", name: "_slicePeriod", type: "uint256" },
       { internalType: "uint256", name: "_totalTokens", type: "uint256" },
-      {
-        internalType: "uint256",
-        name: "_releasedTokens",
-        type: "uint256",
-      },
+      { internalType: "uint256", name: "_releasedTokens", type: "uint256" },
       { internalType: "uint256", name: "_vestedTokens", type: "uint256" },
       { internalType: "uint256", name: "_elaspTime", type: "uint256" },
       { internalType: "uint256", name: "_vestingID", type: "uint256" },
@@ -133,11 +101,7 @@ export const abi = [
   {
     inputs: [
       { internalType: "address", name: "benificiary", type: "address" },
-      {
-        internalType: "uint256",
-        name: "withdrawAmount",
-        type: "uint256",
-      },
+      { internalType: "uint256", name: "withdrawAmount", type: "uint256" },
       { internalType: "uint256", name: "vestingID", type: "uint256" },
     ],
     name: "withdraw",

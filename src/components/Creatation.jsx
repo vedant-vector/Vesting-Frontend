@@ -1,5 +1,7 @@
+import { ethers } from "ethers";
 import React from "react";
 import { useSelector } from "react-redux";
+import contractCreate from "../Contract";
 
 const Creatation = () => {
   const tokenField = useSelector((state) => state.tokenField.value);
@@ -18,19 +20,40 @@ const Creatation = () => {
 
   const enddateTime = enddateField.getendDate + " " + endtimeField.getendtime;
   const endUnixTimestamp = new Date(enddateTime).getTime() / 1000;
-  //Taking Input values to set as contract parameter
 
   const tokenAddress = tokenField.tokenAddress;
   const benificiaryAddress = benificiaryField.benificiaryAddress;
   const totalTokens = tokenAmountField.gettokenamount;
   const startTime = startUnixTimestamp;
-  const cliff = cliffField.getcliff;
+  const cliff = cliffField.getcliff * 86400;
   const vestingPeriod = endUnixTimestamp - startTime;
-  // const slice = sliceTime;
+
+  if (slicetimeField.getsliceTime == "noslice") {
+    const slice = vestingPeriod;
+  } else {
+    const slice = slicetimeField.getsliceTime;
+  }
+
+  const vesting = async (e) => {
+    e.preventDefault();
+    const { contract, signer } = contractCreate();
+    const tokenContract = new ethers.Contract(
+      tokenAddress,
+      ["function approve(address, uint256) public  returns (bool)"],
+      signer
+    );
+    let tx = await tokenContract.connet(signer);
+
+    tx = await tx.approve(contract.address, totalTokens);
+    await tx.wait();
+  };
 
   return (
     <div>
-      <button className=" h-14 mt-16 mb-10 pb-1 w-72 text-3xl rounded-3xl bg-for-bg text-white">
+      <button
+        className=" h-14 mt-16 mb-10 pb-1 w-72 text-3xl rounded-3xl bg-for-bg text-white"
+        onClick={vesting}
+      >
         Confirm Vesting
       </button>
       {/* <h1>{tokenField.tokenAddress}</h1>
