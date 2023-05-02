@@ -36,16 +36,19 @@ const Creatation = () => {
 
   const vesting = async (e) => {
     e.preventDefault();
-    const { contract, signer } = contractCreate();
-    const tokenContract = new ethers.Contract(
-      tokenAddress,
-      ["function approve(address, uint256) public  returns (bool)"],
-      signer
-    );
-    let tx = await tokenContract.connet(signer);
+    const { contract, signer } = await contractCreate();
+    console.log(await signer.getAddress());
 
-    tx = await tx.approve(contract.address, totalTokens);
-    await tx.wait();
+    // await contract.addVestingTokens()
+    // const tokenContract = new ethers.Contract(
+    //   tokenAddress,
+    //   ["function approve(address, uint256) public  returns (bool)"],
+    //   signer
+    // );
+    // let tx = await tokenContract.connet(signer);
+
+    // tx = await tx.approve(contract.address, totalTokens);
+    // await tx.wait();
   };
 
   return (

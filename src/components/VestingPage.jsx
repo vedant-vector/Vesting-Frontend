@@ -8,6 +8,9 @@ import Stepfive from "./Stepfive";
 import Creatation from "./Creatation";
 
 const VestingPage = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="">
       <p className=" text-5xl pl-24 pt-7 text-left text-for-bg  block">
@@ -15,7 +18,7 @@ const VestingPage = () => {
       </p>
 
       <div>
-        <form action="">
+        <form action="" onSubmit={handleSubmit}>
           <HeadingBar title={"Step -1  Select Network"} />
           <Stepone />
           <HeadingBar title={"Step -2  Enter Token Address"} />
