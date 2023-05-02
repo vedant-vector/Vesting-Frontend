@@ -27,48 +27,61 @@ const Creatation = () => {
   const startTime = startUnixTimestamp;
   const cliff = cliffField.getcliff * 86400;
   const vestingPeriod = endUnixTimestamp - startTime;
+  let slice = 0;
 
-  if (slicetimeField.getsliceTime == "noslice") {
-    const slice = vestingPeriod;
+  if (slicetimeField.getsliceTime === "noslice") {
+    slice = vestingPeriod;
   } else {
-    const slice = slicetimeField.getsliceTime;
+    slice = slicetimeField.getsliceTime;
   }
 
   const vesting = async (e) => {
     e.preventDefault();
     const { contract, signer } = await contractCreate();
+    console.log(tokenAddress);
+    console.log(benificiaryAddress);
+    console.log(totalTokens);
+    console.log(startTime);
+    console.log(cliff);
+    console.log(vestingPeriod);
+    console.log(slice);
+    try {
+      const tokenContract = new ethers.Contract(
+        tokenAddress,
+        ["function approve(address , uint256) returns (bool)"],
+        signer
+      );
+      await tokenContract
+        .connect(signer)
+        .approve(contract.address, totalTokens);
+
+      const contractInstance = contract.connect(signer);
+      await contractInstance.addVestingTokens(
+        tokenAddress,
+        benificiaryAddress,
+        totalTokens,
+        startTime,
+        cliff,
+        vestingPeriod,
+        slice
+      );
+    } catch (error) {
+      console.log(error);
+    }
+
     console.log(await signer.getAddress());
-
-    // await contract.addVestingTokens()
-    // const tokenContract = new ethers.Contract(
-    //   tokenAddress,
-    //   ["function approve(address, uint256) public  returns (bool)"],
-    //   signer
-    // );
-    // let tx = await tokenContract.connet(signer);
-
-    // tx = await tx.approve(contract.address, totalTokens);
-    // await tx.wait();
   };
 
   return (
-    <div>
-      <button
-        className=" h-14 mt-16 mb-10 pb-1 w-72 text-3xl rounded-3xl bg-for-bg text-white"
-        onClick={vesting}
-      >
-        Confirm Vesting
-      </button>
-      {/* <h1>{tokenField.tokenAddress}</h1>
-      <h1>{benificiaryField.benificiaryAddress}</h1>
-      <h1>{startdateField.getstartDate}</h1>
-      <h1>{enddateField.getendDate}</h1>
-      <h1>{starttimeField.getstarttime}</h1>
-      <h1>{endtimeField.getendtime}</h1>
-      <h1>{slicetimeField.getslicetime}</h1>
-      <h1>{cliffField.getcliff}</h1>
-      <h1>{tokenAmountField.gettokenamount}</h1> */}
-    </div>
+    <button
+      type="submit"
+      className=" h-14 mt-16 mb-10 pb-1 w-72 text-3xl rounded-3xl bg-for-bg text-white"
+      onClick={(e) => {
+        vesting(e);
+      }}
+    >
+      Confirm Vesting
+    </button>
   );
 };
 

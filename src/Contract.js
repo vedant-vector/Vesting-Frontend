@@ -13,7 +13,6 @@ const contractCreate = async () => {
     abi,
     signer
   );
-
   return { contract, signer };
 };
 

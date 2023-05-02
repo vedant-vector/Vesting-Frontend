@@ -10,9 +10,9 @@ const Stepfive = () => {
   const benificiaryField = useSelector((state) => state.benificiaryField.value);
 
   const dispatch = useDispatch();
-  const [tokenAmount, setTokenAmount] = useState(0);
+  const [tokenAmount, setTokenAmount] = useState("");
   const handlechange = (e) => {
-    setTokenAmount(e.target.value);
+    setTokenAmount(ethers.utils.parseEther(e.target.value));
   };
   console.log(tokenAmount);
   dispatch(addTokenAmount({ gettokenamount: tokenAmount }));
@@ -36,7 +36,7 @@ const Stepfive = () => {
       <p className="ml-24 pt-3 text-lg">Token Amount</p>
       <div className=" ml-24 pt-0 text-lg flex  ">
         <input
-          type="number"
+          type="text"
           required
           className={`h-10 w-56 bg-tahiti border-for-bg border rounded-lg my-2 pl-3 text-lg`}
           onChange={handlechange}

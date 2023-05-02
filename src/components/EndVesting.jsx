@@ -17,7 +17,7 @@ const EndVesting = () => {
     setSlice(e.target.value);
   };
   console.log(slice);
-  dispatch(addSlice({ getslicetime: slice }));
+  dispatch(addSlice({ getsliceTime: slice }));
 
   return (
     <div>

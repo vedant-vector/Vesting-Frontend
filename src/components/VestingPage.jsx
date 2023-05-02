@@ -10,6 +10,7 @@ import Creatation from "./Creatation";
 const VestingPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("handleSubmit");
   };
   return (
     <div className="">
@@ -18,7 +19,7 @@ const VestingPage = () => {
       </p>
 
       <div>
-        <form action="" onSubmit={handleSubmit}>
+        <form>
           <HeadingBar title={"Step -1  Select Network"} />
           <Stepone />
           <HeadingBar title={"Step -2  Enter Token Address"} />
@@ -29,9 +30,10 @@ const VestingPage = () => {
           <Stepfour />
           <HeadingBar title={"Step -5  Enter Token Amount"} />
           <Stepfive />
-          <button type="submit">
-            <Creatation />
-          </button>
+          <Creatation />
+          {/* <button type="submit">
+            
+          </button> */}
         </form>
       </div>
     </div>

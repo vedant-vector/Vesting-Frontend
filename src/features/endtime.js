@@ -8,6 +8,10 @@ export const endtimeSlice = createSlice({
       state.value = action.payload;
     },
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export const { addendtime } = endtimeSlice.actions;
