@@ -9,6 +9,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import VestingPage from "./components/VestingPage";
+import Claim from "./components/Claim";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/home" element={<Body />} />
           <Route path="/vesting" element={<VestingPage />} />
+          <Route path="/claim" element={<Claim />} />
           <Route path="*" element={<Navigate to="/home" replace={true} />} />
         </Routes>
         <Footer />

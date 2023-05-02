@@ -35,7 +35,9 @@ const Header = () => {
         <Link to={"/home"}>
           <li className="mx-3">Home</li>
         </Link>
-        <li className="mx-3">Claim</li>
+        <Link to={"/claim"}>
+          <li className="mx-3">Claim</li>
+        </Link>
         <li className="mx-3">Social</li>
       </ul>
       <button
