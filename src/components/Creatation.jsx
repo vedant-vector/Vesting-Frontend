@@ -38,13 +38,6 @@ const Creatation = () => {
   const vesting = async (e) => {
     e.preventDefault();
     const { contract, signer } = await contractCreate();
-    console.log(tokenAddress);
-    console.log(benificiaryAddress);
-    console.log(totalTokens);
-    console.log(startTime);
-    console.log(cliff);
-    console.log(vestingPeriod);
-    console.log(slice);
     try {
       const tokenContract = new ethers.Contract(
         tokenAddress,
