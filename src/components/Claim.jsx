@@ -48,11 +48,13 @@ const Claim = () => {
         const name = await tokenAddress.name();
         const symbol = await tokenAddress.symbol();
         const totalVested = ethers.utils.formatEther(value[5]);
+        const vestingID = await value[9].toNumber();
         let claimed = await contract.withdrawableAmount(
           signer.getAddress(),
           index
         );
-        console.log(claimed.toNumber());
+
+        claimed = BigInt(value[5]) - BigInt(claimed);
         const startdate = new Date(value[1].toNumber() * 1000)
           .toLocaleString()
           .slice(0, 10);
@@ -61,8 +63,6 @@ const Claim = () => {
         )
           .toLocaleString()
           .slice(0, 10);
-        // ClaimCalculation(value,index,signer)
-        // let a = BigInt(value[5]);
         let claimableTokens = ClaimCalculation(value, index, signer);
         return {
           name,
@@ -72,6 +72,7 @@ const Claim = () => {
           enddate,
           claimed,
           claimableTokens,
+          vestingID,
         };
       })
     );
@@ -86,14 +87,14 @@ const Claim = () => {
         </p>
       </div>
       <img src={bgImage} alt="robo-image" className="inline-block h-36" />
-      <div className=" w-auto mx-48 bg-for-bg h-12 mt-8 rounded-t-2xl border-2 border-b-0 border-black border-b-for-bg flex text-xl font-bold text-white justify-evenly py-2">
-        <p>Token</p>
-        <p>Claimed</p>
-        <p>Total</p>
-        <p>Start</p>
-        <p>End</p>
-        <p>Claimable</p>
-        <p>Action</p>
+      <div className="grid grid-cols-9 gap-4 w-auto mx-48 bg-for-bg h-12 mt-8 rounded-t-2xl border-2 border-b-0 border-black border-b-for-bg  text-xl font-bold text-white justify-evenly py-2">
+        <p className="col-span-2 flex items-center justify-center">Token</p>
+        <p className="col-span-1 flex items-center justify-center">Claimed</p>
+        <p className="col-span-1 flex items-center justify-center">Total</p>
+        <p className="col-span-1 flex items-center justify-center">Start</p>
+        <p className="col-span-1 flex items-center justify-center">End</p>
+        <p className="col-span-1 flex items-center justify-center">Claimable</p>
+        <p className="col-span-2 flex items-center justify-center">Action</p>
       </div>
       <div className=" bg-white shadow-for-bg border-2 border-black shadow-2xl py-3 mb-48 mx-48 rounded-b-2xl ">
         {list.map((ele) => {

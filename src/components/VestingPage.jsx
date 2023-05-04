@@ -31,9 +31,6 @@ const VestingPage = () => {
           <HeadingBar title={"Step -5  Enter Token Amount"} />
           <Stepfive />
           <Creatation />
-          {/* <button type="submit">
-            
-          </button> */}
         </form>
       </div>
     </div>
