@@ -18,7 +18,7 @@ const Header = () => {
     console.log(address);
   };
   window.ethereum.on("accountsChanged", walletConnect);
-  // window.ethereum.on("networkChanged", () => {
+  // window.ethereum.on("chainChanged", () => {
   //   window.onbeforeunload = function () {
   //     return "Prevent reload";
   //   };

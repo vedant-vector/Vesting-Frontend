@@ -12,7 +12,9 @@ const Stepfive = () => {
   const dispatch = useDispatch();
   const [tokenAmount, setTokenAmount] = useState("");
   const handlechange = (e) => {
-    setTokenAmount(ethers.utils.parseEther(e.target.value));
+    try {
+      setTokenAmount(ethers.utils.parseEther(e.target.value));
+    } catch (error) {}
   };
   console.log(tokenAmount);
   dispatch(addTokenAmount({ gettokenamount: tokenAmount }));

@@ -14,6 +14,7 @@ const ClaimButton = (props) => {
   const [amount, setAmount] = React.useState(0);
 
   const handleClickOpen = () => {
+    // if()
     setOpen(true);
   };
 
@@ -27,22 +28,42 @@ const ClaimButton = (props) => {
 
   const handleWithdraw = async () => {
     const { contract, signer } = await contractCreate();
-    await contract
-      .connect(signer)
-      .withdraw(
-        await signer.getAddress(),
-        ethers.utils.parseEther(amount),
-        props.vestingID
-      );
-
-    handleClose();
+    try {
+      const tx = await contract
+        .connect(signer)
+        .withdraw(
+          await signer.getAddress(),
+          ethers.utils.parseEther(amount),
+          props.vestingID
+        );
+      await tx.wait();
+      window.location.reload();
+      handleClose();
+    } catch (error) {
+      alert("Transaction Failed");
+      handleClose();
+    }
   };
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen}>
-        Withdraw
-      </Button>
+      {(ethers.utils.formatEther(props.claimableTokens) == 0 && (
+        <Button variant="contained" disabled onClick={handleClickOpen}>
+          Collected
+        </Button>
+      )) ||
+        (props.cliffTime < Math.floor(Date.now() / 1000) && (
+          <Button variant="contained" onClick={handleClickOpen}>
+            Withdraw
+          </Button>
+        ))}
+      {props.cliffTime >= Math.floor(Date.now() / 1000) && (
+        <Button variant="contained" disabled onClick={handleClickOpen}>
+          Locked
+        </Button>
+      )}
+      {}
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Withdraw money</DialogTitle>
         <DialogContent>

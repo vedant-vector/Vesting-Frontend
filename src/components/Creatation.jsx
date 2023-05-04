@@ -79,14 +79,6 @@ const Creatation = () => {
       return false;
     }
 
-    // Check if input values are in correct format
-    // if (!/^\d+$/.test(totalTokens)) {
-    //   alert("Token amount must be a positive integer");
-    //   return false;
-    // }
-
-    // Add more validation checks as needed
-
     return true;
   };
 

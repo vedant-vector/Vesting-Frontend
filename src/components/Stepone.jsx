@@ -35,7 +35,13 @@ const networks = {
 const Stepone = () => {
   const handleNetworkSwitch = async (newchainID, networkname, e) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
+    try {
+      await provider.send("eth_requestAccounts", []);
+    } catch (error) {
+      if (error.code === 4001) {
+        alert("Request Rejected");
+      }
+    }
     const { chainId } = await provider.getNetwork();
 
     if (chainId !== newchainID) {
@@ -50,6 +56,7 @@ const Stepone = () => {
           ],
         });
       } catch (err) {
+        console.log(err.code);
         if (err.code === 4902) {
           try {
             await window.ethereum.request({
@@ -60,9 +67,7 @@ const Stepone = () => {
                 },
               ],
             });
-          } catch (err) {
-            console.log(err.message);
-          }
+          } catch (err) {}
         }
       }
     }

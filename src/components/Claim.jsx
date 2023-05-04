@@ -5,20 +5,28 @@ import bgImage from "../images/claimIMG.png";
 import contractCreate from "../Contract";
 import ClaimDetails from "./ClaimDetails";
 import ClaimCalculation from "../ClaimCalculation";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const Claim = () => {
   const [list, setList] = useState([]);
+
+  window.ethereum.on("chainChanged", () => {
+    window.location.reload();
+  });
 
   useEffect(() => {
     const displayData = async () => {
       const { contract, signer } = await contractCreate();
       let vestId = 0;
       let schedule = [];
+
       while (true) {
         let response = await contract.vestingSchedules(
           await signer.getAddress(),
           vestId
         );
+
         if (ethers.utils.formatEther(response[5]) != 0.0) {
           schedule.push(
             await contract.vestingSchedules(await signer.getAddress(), vestId)
@@ -28,6 +36,7 @@ const Claim = () => {
           break;
         }
       }
+
       const arr = await gettoken(schedule, contract, signer);
       setList(arr);
     };
@@ -45,16 +54,21 @@ const Claim = () => {
           ],
           signer
         );
+
         const name = await tokenAddress.name();
         const symbol = await tokenAddress.symbol();
         const totalVested = ethers.utils.formatEther(value[5]);
         const vestingID = await value[9].toNumber();
+        const cliffTime = await value[2].toNumber();
+
         let claimed = await contract.withdrawableAmount(
           signer.getAddress(),
           index
         );
+        claimed == 0
+          ? (claimed = 0)
+          : (claimed = BigInt(value[5]) - BigInt(claimed));
 
-        claimed = BigInt(value[5]) - BigInt(claimed);
         const startdate = new Date(value[1].toNumber() * 1000)
           .toLocaleString()
           .slice(0, 10);
@@ -63,7 +77,9 @@ const Claim = () => {
         )
           .toLocaleString()
           .slice(0, 10);
+
         let claimableTokens = ClaimCalculation(value, index, signer);
+
         return {
           name,
           symbol,
@@ -73,9 +89,11 @@ const Claim = () => {
           claimed,
           claimableTokens,
           vestingID,
+          cliffTime,
         };
       })
     );
+
     return arr;
   };
 
@@ -96,6 +114,13 @@ const Claim = () => {
         <p className="col-span-1 flex items-center justify-center">Claimable</p>
         <p className="col-span-2 flex items-center justify-center">Action</p>
       </div>
+      {list.length === 0 && (
+        <div className="mx-48">
+          <Box sx={{ width: "100%" }}>
+            <LinearProgress />
+          </Box>
+        </div>
+      )}
       <div className=" bg-white shadow-for-bg border-2 border-black shadow-2xl py-3 mb-48 mx-48 rounded-b-2xl ">
         {list.map((ele) => {
           return <ClaimDetails element={ele} />;
