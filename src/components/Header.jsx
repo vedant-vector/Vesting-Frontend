@@ -12,10 +12,12 @@ const Header = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
     signer = provider.getSigner();
-    // address = await signer.getAddress();
     setAddress(await signer.getAddress());
     setConnection(true);
-    console.log(address);
+    localStorage.setItem("Account", address);
+    console.log("Hi");
+    let ad = localStorage.getItem("Account");
+    console.log(ad);
   };
   window.ethereum.on("accountsChanged", walletConnect);
   // window.ethereum.on("chainChanged", () => {

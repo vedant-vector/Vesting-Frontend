@@ -7,9 +7,11 @@ const contractCreate = async () => {
   const signer = provider.getSigner();
 
   //New adddress 0xA5c33a1C325585b1084dAD0334Db04D52f765fE5
-  // odl :- 0x2eC9BB61161442106090097cE7eF824c898Ee65d
+  // odl :- 0x7da681f07694731695C3559181A9D0F5569C7EB7
+
+  //Newest :- 0x6c7525ba73658bbD108D3fEd764b9B9811F90860
   const contract = new ethers.Contract(
-    "0x7da681f07694731695C3559181A9D0F5569C7EB7",
+    "0x6c7525ba73658bbD108D3fEd764b9B9811F90860",
     abi,
     signer
   );

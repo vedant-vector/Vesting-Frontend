@@ -1,3 +1,4 @@
+/* global BigInt */
 import * as React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,12 +11,13 @@ import contractCreate from "../Contract";
 import { ethers } from "ethers";
 
 const ClaimButton = (props) => {
+  let counter = true;
   const [open, setOpen] = React.useState(false);
   const [amount, setAmount] = React.useState(0);
 
   const handleClickOpen = () => {
-    // if()
     setOpen(true);
+    counter = false;
   };
 
   const handleClose = () => {
@@ -28,47 +30,62 @@ const ClaimButton = (props) => {
 
   const handleWithdraw = async () => {
     const { contract, signer } = await contractCreate();
-    try {
-      const tx = await contract
-        .connect(signer)
-        .withdraw(
-          await signer.getAddress(),
-          ethers.utils.parseEther(amount),
-          props.vestingID
-        );
-      await tx.wait();
-      window.location.reload();
-      handleClose();
-    } catch (error) {
-      alert("Transaction Failed");
-      handleClose();
+    if (amount > ethers.utils.formatEther(props.claimableTokens)) {
+      alert("Withdraw limit exceeds");
+    } else {
+      try {
+        const tx = await contract
+          .connect(signer)
+          .withdraw(
+            await signer.getAddress(),
+            ethers.utils.parseEther(amount),
+            props.vestingID
+          );
+        await tx.wait();
+        let newclaimed = localStorage.getItem(props.vestingID);
+        console.log(newclaimed);
+        let amountVal = ethers.utils.parseEther(amount);
+        if (newclaimed) {
+          amountVal =
+            BigInt(ethers.utils.parseEther(amount)) + BigInt(newclaimed);
+        }
+        console.log(amount);
+        localStorage.setItem(props.vestingID, amountVal);
+        window.location.reload();
+        handleClose();
+      } catch (error) {
+        console.log(error);
+        alert("Transaction Failed");
+        handleClose();
+      }
     }
   };
 
   return (
     <div>
-      {(ethers.utils.formatEther(props.claimableTokens) == 0 && (
+      {props.cliffTime >= Math.floor(Date.now() / 1000) ? (
         <Button variant="contained" disabled onClick={handleClickOpen}>
-          Collected
+          Locked
         </Button>
-      )) ||
+      ) : (
+        (ethers.utils.formatEther(props.claimableTokens) == 0 && (
+          <Button variant="contained" disabled onClick={handleClickOpen}>
+            Collected
+          </Button>
+        )) ||
         (props.cliffTime < Math.floor(Date.now() / 1000) && (
           <Button variant="contained" onClick={handleClickOpen}>
             Withdraw
           </Button>
-        ))}
-      {props.cliffTime >= Math.floor(Date.now() / 1000) && (
-        <Button variant="contained" disabled onClick={handleClickOpen}>
-          Locked
-        </Button>
+        ))
       )}
-      {}
 
+      {}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Withdraw money</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please enter the amount you wish to withdraw:
+            Please enter the Token you wish to withdraw:
           </DialogContentText>
           <TextField
             autoFocus

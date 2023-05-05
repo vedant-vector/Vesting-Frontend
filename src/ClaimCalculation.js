@@ -30,6 +30,7 @@ const ClaimCalculation = (scheduleValue, vestingId, signer) => {
 
   if (intervalElapsed >= intervals) {
     vestedTokens += totalTokens - releasedTokens;
+    releasedTokens = totalTokens;
   }
   return vestedTokens;
 };

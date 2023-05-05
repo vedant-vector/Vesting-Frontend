@@ -37,6 +37,9 @@ const Creatation = () => {
 
   const vesting = async (e) => {
     e.preventDefault();
+    if (!validateInputs()) {
+      return;
+    }
     const { contract, signer } = await contractCreate();
     try {
       const tokenContract = new ethers.Contract(
@@ -44,12 +47,14 @@ const Creatation = () => {
         ["function approve(address , uint256) returns (bool)"],
         signer
       );
-      await tokenContract
+      console.log("Hi1");
+      const approveTx = await tokenContract
         .connect(signer)
         .approve(contract.address, totalTokens);
-
+      await approveTx.wait();
+      console.log("Hi2");
       const contractInstance = contract.connect(signer);
-      await contractInstance.addVestingTokens(
+      const createTx = await contractInstance.addVestingTokens(
         tokenAddress,
         benificiaryAddress,
         totalTokens,
@@ -58,16 +63,19 @@ const Creatation = () => {
         vestingPeriod,
         slice
       );
+      await createTx.wait();
+      alert("Vesting Created Successfully..");
+      window.location.reload();
     } catch (error) {
       console.log(error);
-    }
-    if (!validateInputs()) {
-      return;
     }
   };
 
   const validateInputs = () => {
-    // Check if all required input fields are filled
+    if (startdateField.getstartDate >= enddateField.getendDate) {
+      alert("Invalid Dates");
+      return false;
+    }
     if (
       !tokenAddress ||
       !benificiaryAddress ||
