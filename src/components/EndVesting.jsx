@@ -12,11 +12,10 @@ const EndVesting = () => {
     setEnd(e.target.value);
   };
   dispatch(addendtime({ getendtime: end }));
-  console.log(end);
+
   const handleSlice = (e) => {
     setSlice(e.target.value);
   };
-  console.log(slice);
   dispatch(addSlice({ getsliceTime: slice }));
 
   return (

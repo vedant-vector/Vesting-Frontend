@@ -8,7 +8,6 @@ const Steptwo = () => {
   const handleChange = (event) => {
     setTokenValue(event.target.value);
   };
-  console.log(token);
   dispatch(addTokenAddress({ tokenAddress: token }));
 
   return (

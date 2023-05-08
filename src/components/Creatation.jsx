@@ -64,9 +64,7 @@ const Creatation = () => {
       await createTx.wait();
       alert("Vesting Created Successfully..");
       window.location.reload();
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const validateInputs = () => {

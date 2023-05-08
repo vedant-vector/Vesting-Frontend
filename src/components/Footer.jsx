@@ -8,9 +8,11 @@ const Footer = () => {
         <p className="my-2 font-bold">About</p>
         <ul>
           <li>
+            {/* eslint-disable-next-line*/}
             <a href="#">Vesting</a>
           </li>
           <li>
+            {/* eslint-disable-next-line*/}
             <a href="#">Developer</a>
           </li>
         </ul>
@@ -19,9 +21,11 @@ const Footer = () => {
         <p className="my-2 font-bold">Social</p>
         <ul>
           <li>
+            {/* eslint-disable-next-line*/}
             <a href="#">Twitter</a>
           </li>
           <li>
+            {/* eslint-disable-next-line*/}
             <a href="#">LinkedIN</a>
           </li>
         </ul>
@@ -30,6 +34,7 @@ const Footer = () => {
         <p className="my-2 font-bold">Contact</p>
         <ul>
           <li>
+            {/* eslint-disable-next-line*/}
             <a href="#">vedant@simformsolutions.com</a>
           </li>
         </ul>

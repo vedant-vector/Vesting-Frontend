@@ -8,7 +8,6 @@ function MyCalendar() {
 
   dispatch(addstartDate({ getstartDate: startDate }));
 
-  console.log("Start date - ", startDate);
   function getToday() {
     const today = new Date();
     const year = today.getFullYear();

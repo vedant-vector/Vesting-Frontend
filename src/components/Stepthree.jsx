@@ -8,7 +8,6 @@ const Stepthree = () => {
   const handleChange = (event) => {
     setbeneficiaryValue(event.target.value);
   };
-  console.log(beneficiary);
 
   dispatch(addBenificiaryAddress({ benificiaryAddress: beneficiary }));
   return (

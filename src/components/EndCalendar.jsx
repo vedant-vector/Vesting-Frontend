@@ -11,7 +11,7 @@ const EndCalendar = () => {
   newStartDate.setDate(newStartDate.getDate() + 1);
 
   dispatch(addendDate({ getendDate: endDate }));
-  console.log("End date - ", endDate);
+
   function getToday() {
     const today = new Date();
     const year = today.getFullYear();

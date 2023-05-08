@@ -11,13 +11,11 @@ import contractCreate from "../Contract";
 import { ethers } from "ethers";
 
 const ClaimButton = (props) => {
-  let counter = true;
   const [open, setOpen] = React.useState(false);
   const [amount, setAmount] = React.useState(0);
 
   const handleClickOpen = () => {
     setOpen(true);
-    counter = false;
   };
 
   const handleClose = () => {
@@ -43,18 +41,15 @@ const ClaimButton = (props) => {
           );
         await tx.wait();
         let newclaimed = localStorage.getItem(props.vestingID);
-        console.log(newclaimed);
         let amountVal = ethers.utils.parseEther(amount);
         if (newclaimed) {
           amountVal =
             BigInt(ethers.utils.parseEther(amount)) + BigInt(newclaimed);
         }
-        console.log(amount);
         localStorage.setItem(props.vestingID, amountVal);
         window.location.reload();
         handleClose();
       } catch (error) {
-        console.log(error);
         alert("Transaction Failed");
         handleClose();
       }
@@ -68,6 +63,7 @@ const ClaimButton = (props) => {
           Locked
         </Button>
       ) : (
+        // eslint-disable-next-line
         (ethers.utils.formatEther(props.claimableTokens) == 0 && (
           <Button variant="contained" disabled onClick={handleClickOpen}>
             Collected

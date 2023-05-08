@@ -13,7 +13,6 @@ const ClaimDetails = (props) => {
       <div className="col-span-1 flex items-center justify-center">
         <p className="text-lg font-medium">
           {ethers.utils.formatEther(props.element.claimed)}
-          {/* {.slice(0, 9)} */}
         </p>
       </div>
       <div className="col-span-1 flex items-center justify-center">

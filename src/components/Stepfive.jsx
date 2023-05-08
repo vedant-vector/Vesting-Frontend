@@ -21,7 +21,7 @@ const Stepfive = () => {
 
   const [balance, setBalance] = useState(0);
   const displayBalance = async () => {
-    const { contract, signer } = await contractCreate();
+    const { contract } = await contractCreate();
     setBalance(
       ethers.utils.formatEther(
         await contract.checkBalance(

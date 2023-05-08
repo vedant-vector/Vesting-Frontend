@@ -39,11 +39,6 @@ const Header = () => {
   };
 
   window.ethereum.on("accountsChanged", walletConnect);
-  // window.ethereum.on("chainChanged", () => {
-  //   window.onbeforeunload = function () {
-  //     return "Prevent reload";
-  //   };
-  // });
 
   return (
     <div className="h-18 border-b-2 shadow-for-bg shadow-2xl flex">

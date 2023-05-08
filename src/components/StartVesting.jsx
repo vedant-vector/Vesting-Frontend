@@ -10,7 +10,6 @@ const StartVesting = () => {
     setStart(e.target.value);
   };
   dispatch(addstarttime({ getstarttime: start }));
-  console.log(start);
   return (
     <div>
       <div className=" ml-24 pt-3 text-lg flex  ">

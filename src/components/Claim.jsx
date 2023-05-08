@@ -1,4 +1,3 @@
-/* global BigInt */
 import { ethers } from "ethers";
 import React, { useState, useEffect } from "react";
 import bgImage from "../images/claimIMG.png";
@@ -28,7 +27,7 @@ const Claim = () => {
           await signer.getAddress(),
           vestId
         );
-
+        // eslint-disable-next-line
         if (ethers.utils.formatEther(response[5]) != 0.0) {
           schedule.push(
             await contract.vestingSchedules(await signer.getAddress(), vestId)
@@ -103,7 +102,7 @@ const Claim = () => {
           Claim Your Tokens
         </p>
       </div>
-      <img src={bgImage} alt="robo-image" className="inline-block h-36" />
+      <img src={bgImage} alt="robo" className="inline-block h-36" />
       <div className="grid grid-cols-9 gap-4 w-auto mx-48 bg-for-bg h-12 mt-8 rounded-t-2xl border-2 border-b-0 border-black border-b-for-bg  text-xl font-bold text-white justify-evenly py-2">
         <p className="col-span-2 flex items-center justify-center">Token</p>
         <p className="col-span-1 flex items-center justify-center">Claimed</p>

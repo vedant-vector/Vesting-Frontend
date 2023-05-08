@@ -56,7 +56,6 @@ const Stepone = () => {
           ],
         });
       } catch (err) {
-        console.log(err.code);
         if (err.code === 4902) {
           try {
             await window.ethereum.request({
@@ -75,7 +74,6 @@ const Stepone = () => {
 
   return (
     <div className=" bg-white shadow-for-bg shadow-lg py-3 mb-5 mx-48 rounded-b-2xl">
-      {/* <form action="#"> */}
       <p className="ml-24 pt-1 text-xl text-left">
         Select Blockchain Network Of Your Token:-
       </p>
@@ -171,7 +169,6 @@ const Stepone = () => {
           </div>
         </div>
       </div>
-      {/* </form> */}
     </div>
   );
 };
