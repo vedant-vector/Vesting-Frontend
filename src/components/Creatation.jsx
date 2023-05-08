@@ -47,12 +47,10 @@ const Creatation = () => {
         ["function approve(address , uint256) returns (bool)"],
         signer
       );
-      console.log("Hi1");
       const approveTx = await tokenContract
         .connect(signer)
         .approve(contract.address, totalTokens);
       await approveTx.wait();
-      console.log("Hi2");
       const contractInstance = contract.connect(signer);
       const createTx = await contractInstance.addVestingTokens(
         tokenAddress,

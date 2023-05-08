@@ -67,7 +67,7 @@ const Claim = () => {
         if (claimed === null) {
           claimed = 0;
         }
-        console.log(claimed);
+
         const startdate = new Date(value[1].toNumber() * 1000)
           .toLocaleString()
           .slice(0, 10);

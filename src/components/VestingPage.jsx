@@ -8,10 +8,6 @@ import Stepfive from "./Stepfive";
 import Creatation from "./Creatation";
 
 const VestingPage = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("handleSubmit");
-  };
   return (
     <div className="">
       <p className=" text-5xl pl-24 pt-7 text-left text-for-bg  block">
@@ -20,15 +16,15 @@ const VestingPage = () => {
 
       <div>
         <form>
-          <HeadingBar title={"Step -1  Select Network"} />
+          <HeadingBar title={" Select Network"} />
           <Stepone />
-          <HeadingBar title={"Step -2  Enter Token Address"} />
+          <HeadingBar title={" Enter Token Address"} />
           <Steptwo />
-          <HeadingBar title={"Step -3  Enter Wallet Address"} />
+          <HeadingBar title={" Enter Wallet Address"} />
           <Stepthree />
-          <HeadingBar title={"Step -4  Enter Vesting Details"} />
+          <HeadingBar title={" Enter Vesting Details"} />
           <Stepfour />
-          <HeadingBar title={"Step -5  Enter Token Amount"} />
+          <HeadingBar title={" Enter Token Amount"} />
           <Stepfive />
           <Creatation />
         </form>
