@@ -21,12 +21,12 @@ const Stepfive = () => {
 
   const [balance, setBalance] = useState(0);
   const displayBalance = async () => {
-    const { contract } = await contractCreate();
+    const { contract, signer } = await contractCreate();
     setBalance(
       ethers.utils.formatEther(
         await contract.checkBalance(
           tokenField.tokenAddress,
-          benificiaryField.benificiaryAddress
+          await signer.getAddress()
         )
       )
     );
