@@ -7,7 +7,6 @@ import { ethers } from "ethers";
 
 const Stepfive = () => {
   const tokenField = useSelector((state) => state.tokenField.value);
-  const benificiaryField = useSelector((state) => state.benificiaryField.value);
 
   const dispatch = useDispatch();
   const [tokenAmount, setTokenAmount] = useState("");
@@ -16,7 +15,6 @@ const Stepfive = () => {
       setTokenAmount(ethers.utils.parseEther(e.target.value));
     } catch (error) {}
   };
-  console.log(tokenAmount);
   dispatch(addTokenAmount({ gettokenamount: tokenAmount }));
 
   const [balance, setBalance] = useState(0);

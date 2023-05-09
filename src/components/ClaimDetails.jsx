@@ -12,11 +12,13 @@ const ClaimDetails = (props) => {
       </div>
       <div className="col-span-1 flex items-center justify-center">
         <p className="text-lg font-medium">
-          {ethers.utils.formatEther(props.element.claimed)}
+          {ethers.utils.formatEther(props.element.claimed).slice(0, 9)}
         </p>
       </div>
       <div className="col-span-1 flex items-center justify-center">
-        <p className="text-lg font-medium">{props.element.totalVested}</p>
+        <p className="text-lg font-medium">
+          {props.element.totalVested.slice(0, 9)}
+        </p>
       </div>
       <div className="col-span-1 ml-2 flex items-center justify-center">
         <p className="text-lg font-medium">{props.element.startdate}</p>
@@ -26,7 +28,7 @@ const ClaimDetails = (props) => {
       </div>
       <div className="col-span-1 ml-4 flex items-center justify-center">
         <p className="text-lg font-bold text-lime-700 ">
-          {ethers.utils.formatEther(props.element.claimableTokens)}
+          {ethers.utils.formatEther(props.element.claimableTokens).slice(0, 9)}
         </p>
       </div>
       <div className="col-span-2 flex items-center justify-center">

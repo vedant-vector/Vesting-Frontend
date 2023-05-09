@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import ethLogo from "../images/ethereum-eth-logo.png";
 import mumbaiLogo from "../images/polygon-matic-logo.png";
 
@@ -33,6 +34,8 @@ const networks = {
 };
 
 const Stepone = () => {
+  const [chainId, setChainId] = useState(null);
+
   const handleNetworkSwitch = async (newchainID, networkname, e) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     try {
@@ -71,6 +74,14 @@ const Stepone = () => {
       }
     }
   };
+  useEffect(() => {
+    const forChecked = async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const { chainId } = await provider.getNetwork();
+      setChainId(chainId);
+    };
+    forChecked();
+  }, [chainId]);
 
   return (
     <div className=" bg-white shadow-for-bg shadow-lg py-3 mb-5 mx-48 rounded-b-2xl">
@@ -84,6 +95,7 @@ const Stepone = () => {
             type="radio"
             name="network"
             id="0"
+            checked={chainId === 1}
             className=" float-right  cursor-pointer "
             onClick={(e) => handleNetworkSwitch(1, "ethereum", e)}
           />
@@ -106,6 +118,7 @@ const Stepone = () => {
             type="radio"
             name="network"
             id="1"
+            checked={chainId === 11155111}
             className=" float-right cursor-pointer"
             onClick={() => handleNetworkSwitch(11155111, "sepolia")}
             required
@@ -129,6 +142,7 @@ const Stepone = () => {
             <input
               type="radio"
               name="network"
+              checked={chainId === 137}
               id="3"
               className=" float-right cursor-pointer"
               onClick={() => handleNetworkSwitch(137, "polygon")}
@@ -152,6 +166,7 @@ const Stepone = () => {
               type="radio"
               name="network"
               id="4"
+              checked={chainId === 80001}
               className=" float-right cursor-pointer"
               onClick={() => handleNetworkSwitch(80001, "mumbai")}
             />

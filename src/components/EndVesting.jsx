@@ -23,7 +23,7 @@ const EndVesting = () => {
       <div className=" ml-24 pt-3 text-lg flex  ">
         <p>End Date</p>
         <p className=" ml-80 ">End Time </p>
-        <p className=" ml-96 bold">Slice Period</p>
+        <p className=" ml-72 bold">Slice Period</p>
       </div>
       <div className=" ml-24 pt-0 text-lg flex  ">
         <EndCalendar />
@@ -36,7 +36,7 @@ const EndVesting = () => {
             required
           />
         </p>
-        <p className=" ml-52 text-lg inline">
+        <p className=" ml-28 text-lg inline">
           <select
             name="slice"
             id="slice"

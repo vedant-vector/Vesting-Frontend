@@ -8,7 +8,6 @@ const Cliff = () => {
   const handlechange = (e) => {
     setCliff(e.target.value);
   };
-  console.log(cliff);
   dispatch(addcliff({ getcliff: cliff }));
   return (
     <div>

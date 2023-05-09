@@ -44,13 +44,22 @@ const Creatation = () => {
     try {
       const tokenContract = new ethers.Contract(
         tokenAddress,
-        ["function approve(address , uint256) returns (bool)"],
+        [
+          "function approve(address , uint256) returns (bool)",
+          "function allowance(address, address) view returns (uint256)",
+        ],
         signer
       );
-      const approveTx = await tokenContract
-        .connect(signer)
-        .approve(contract.address, totalTokens);
-      await approveTx.wait();
+      if (
+        (await tokenContract
+          .connect(signer)
+          .allowance(await signer.getAddress(), contract.address)) < totalTokens
+      ) {
+        const approveTx = await tokenContract
+          .connect(signer)
+          .approve(contract.address, totalTokens);
+        await approveTx.wait();
+      }
       const contractInstance = contract.connect(signer);
       const createTx = await contractInstance.addVestingTokens(
         tokenAddress,
@@ -64,7 +73,9 @@ const Creatation = () => {
       await createTx.wait();
       alert("Vesting Created Successfully..");
       window.location.reload();
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const validateInputs = () => {
