@@ -1,9 +1,15 @@
 import { ethers } from "ethers";
-import React from "react";
+import  { useState } from "react";
 import { useSelector } from "react-redux";
 import contractCreate from "../Contract";
+import CircularProgress from '@mui/material/CircularProgress';
+import { ToastContainer,toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Creatation = () => {
+
+  const [confirm,setConfirm] = useState(false);
+
   const tokenField = useSelector((state) => state.tokenField.value);
   const benificiaryField = useSelector((state) => state.benificiaryField.value);
   const startdateField = useSelector((state) => state.startdateField.value);
@@ -36,7 +42,9 @@ const Creatation = () => {
   }
 
   const vesting = async (e) => {
+
     e.preventDefault();
+    setConfirm(true);
     if (!validateInputs()) {
       return;
     }
@@ -70,9 +78,18 @@ const Creatation = () => {
         vestingPeriod,
         slice
       );
-      await createTx.wait();
-      alert("Vesting Created Successfully..");
-      window.location.reload();
+               
+
+      const val = await createTx.wait();
+      (val.status === 1 ? setConfirm(false) : setConfirm(true))
+      toast.success("Vesting Created Successfully",{
+        position:toast.POSITION.TOP_CENTER,
+      });
+
+      setTimeout(()=>{
+        window.location.reload();
+      },5000);
+      
     } catch (error) {
       console.log(error);
     }
@@ -98,15 +115,24 @@ const Creatation = () => {
   };
 
   return (
+    <>
+    <ToastContainer/>
     <button
       type="submit"
       className=" h-14 mt-16 mb-10 pb-1 w-72 text-3xl rounded-3xl bg-for-bg text-white"
+      disabled={confirm}
+      
       onClick={(e) => {
         vesting(e);
       }}
     >
-      Confirm Vesting
+      {confirm ? (
+      <div className="mt-2">        
+          <CircularProgress color="inherit" />        
+      </div>):("Confirm Vesting")}
     </button>
+    
+    </>
   );
 };
 

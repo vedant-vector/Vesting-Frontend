@@ -1,5 +1,5 @@
 /* global BigInt */
-import React from "react";
+
 
 const ClaimCalculation = (scheduleValue, vestingId, signer) => {
   const starTime = scheduleValue[1].toNumber();

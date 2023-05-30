@@ -9,8 +9,13 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import contractCreate from "../Contract";
 import { ethers } from "ethers";
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const ClaimButton = (props) => {
+
+  const [confirm,setConfirm] = React.useState(false);
+
   const [open, setOpen] = React.useState(false);
   const [amount, setAmount] = React.useState(0);
 
@@ -27,6 +32,7 @@ const ClaimButton = (props) => {
   };
 
   const handleWithdraw = async () => {
+    setConfirm(true);
     const { contract, signer } = await contractCreate();
     if (amount > ethers.utils.formatEther(props.claimableTokens)) {
       alert("Withdraw limit exceeds");
@@ -40,6 +46,7 @@ const ClaimButton = (props) => {
             props.vestingID
           );
         await tx.wait();
+        setConfirm(false);
         let newclaimed = localStorage.getItem(props.vestingID);
         let amountVal = ethers.utils.parseEther(amount);
         if (newclaimed) {
@@ -95,10 +102,16 @@ const ClaimButton = (props) => {
             onChange={handleAmountChange}
           />
         </DialogContent>
+
+        {confirm ? (
+      <DialogActions>
+      <Button ><CircularProgress color="inherit" /> </Button>
+    </DialogActions>): 
+       
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleWithdraw}>Withdraw</Button>
-        </DialogActions>
+        </DialogActions>}
       </Dialog>
     </div>
   );
